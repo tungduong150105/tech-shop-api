@@ -1,0 +1,12 @@
+🗑️  Clearing all data...
+✅ Created admin: admin@techshop.com
+✅ Created customer: customer1@example.com
+✅ Created customer: customer2@example.com
+✅ Created customer: customer3@example.com
+✅ Created customer: customer4@example.com
+✅ Created customer: customer5@example.com
+✅ Created category: Laptops
+✅ Created category: Smartphones
+✅ Created product: MacBook Pro 16-inch
+✅ Created product: iPhone 15 Pro
+Creating sample reviews...

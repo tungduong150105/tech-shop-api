@@ -1,17 +1,18 @@
 module Api::V1
   class CategoriesController < ApplicationController
-    # before_action :authenticate_user, only: [:index, :show]
+    skip_before_action :authenticate_user, only: [ :index, :show ]
+    before_action :require_admin, only: [ :create, :update, :destroy ]
+    before_action :set_category, only: [ :show, :update, :destroy ]
 
     # GET /api/v1/categories
     def index
       @categories = Category.all
-      render json: @categories, status: :ok
+      render json: @categories, include: [ :sub_categories ]
     end
 
     # GET /api/v1/categories/:id
     def show
-      @category = Category.find(params[:id])
-      render json: @category.as_json(include: :products)
+      render json: @category.as_json(include: :products), include: [ :sub_categories ]
     end
 
     # POST /api/v1/categories
@@ -24,9 +25,8 @@ module Api::V1
       end
     end
 
-    #PATCH/PUT /api/v1/categories/:id
+    # PATCH/PUT /api/v1/categories/:id
     def update
-      @category = Category.find(params[:id])
       if @category.update(category_params)
         render json: @category, status: :ok
       else
@@ -36,12 +36,13 @@ module Api::V1
 
     # DELETE /api/v1/categories/:id
     def destroy
-      @category = Category.find(params[:id])
-      @category.destroy
-      head :no_content
     end
 
     private
+
+    def set_category
+      @category = Category.find(params[:id])
+    end
 
     def category_params
       params.require(:category).permit(:name, :image_url, :description)
