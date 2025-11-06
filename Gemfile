@@ -53,3 +53,5 @@ gem 'kaminari'
 gem 'jwt'
 gem 'bcrypt'
 gem 'faker', '~> 3.2', require: false
+
+gem 'kamal'
